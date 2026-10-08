@@ -1,0 +1,970 @@
+/* ==========================================================================
+   Coffin Mail — the marketing site.
+
+   The tokens are the footer's, unchanged: a sage page, dark green ink, Fraunces
+   for anything you read as a sentence. Everything above the footer is set in
+   the same three inks so the video at the bottom belongs to the page rather
+   than sitting under it.
+   ========================================================================== */
+
+:root {
+  --paper: #ebeee7;
+  --ink: #2b3a30;
+  --ink-soft: #3d4a41;
+  --muted: #6b746c;
+  --rule: #d3d9cf;
+  --deep: #e2e6de;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wrap: 1080px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 20;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.skip:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* ------------------------------------------------------------- type ------- */
+
+.h1,
+.h2,
+h1,
+h2 {
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 72;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.h1 {
+  font-size: clamp(34px, 5vw, 54px);
+  max-width: 22ch;
+}
+
+.h2 {
+  font-size: clamp(26px, 3vw, 34px);
+  max-width: 26ch;
+}
+
+.lede {
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 58ch;
+  margin: 14px 0 0;
+}
+
+.kicker {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Floored at 10px rather than scaled by 0.7 — a label has to stay readable. */
+.hero__eyebrow {
+  margin: 0 0 10px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fine {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+/* ------------------------------------------------------------ layout ------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 40px);
+}
+
+.band {
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.band--tight {
+  padding: clamp(40px, 5vw, 64px) 0;
+}
+
+.band--head {
+  padding: clamp(40px, 6vw, 76px) 0 clamp(28px, 3vw, 40px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.band--deep {
+  background: var(--deep);
+}
+
+/* ----------------------------------------------------------- masthead ------ */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.masthead__in {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 18px clamp(20px, 5vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+
+.masthead__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 72;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.masthead__mark {
+  width: 27px;
+  height: auto;
+  display: block;
+}
+
+.masthead__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 20px;
+  font-size: 14px;
+}
+
+.masthead__nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 4px 0;
+}
+
+.masthead__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.masthead__nav a:hover::after,
+.masthead__nav a:focus-visible::after,
+.masthead__nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+.masthead__cta {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 5px 14px !important;
+}
+
+.masthead__cta::after {
+  display: none;
+}
+
+.masthead__cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --------------------------------------------------------------- hero ------ */
+
+/* Full width, and never cropped.
+   The hero is as tall as the frame needs at this width (width x 9/16) and never
+   shorter than the screen, so the video always fills edge to edge *and* shows
+   all of itself — `contain` would letterbox down the sides on a wide screen,
+   `cover` would cut the top off the bridge. Matching the two means neither
+   happens. On a tall screen the video is centred with paper above and below,
+   which the multiply blend makes invisible. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: max(100svh, 56.25vw);
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Just enough paper over the sky to keep the words readable while the coach
+   crosses behind them — no more. The coach is the reason this video exists, so
+   the wash fades out well before the deck: it is mist over the drawing, not a
+   lid on it.
+   The three z-indexes here are load-bearing: the video 0, this 1, the copy 2.
+   Equal z-indexes would let the video win, because it comes later in the DOM
+   than its own parent's ::before — which is exactly what happened once. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    var(--paper) 0%,
+    var(--paper) 34%,
+    rgba(235, 238, 231, 0.55) 52%,
+    rgba(235, 238, 231, 0) 76%
+  );
+  pointer-events: none;
+}
+
+/* Centred copy, because the headline is: two lines of it, centred, over the
+   engraving. The video stays behind everything and the veil still keeps the top
+   readable. */
+.hero__in {
+  order: 1;
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: clamp(44px, 6vw, 84px) clamp(20px, 5vw, 40px) clamp(20px, 2.5vw, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hero type, scaled down by 30%. The eyebrow and the buttons have a floor of
+   their own: 0.7 x 11.5px is 8px, which is not a readable label, and 0.7 x 15px
+   is not a comfortable tap target. */
+/* Two lines, guaranteed: line one is "Write your Death Mail.", line two is
+   "And we'll make sure it reaches them after you die."
+   Each is a nowrap block, so it is one line each at any width — the type size
+   steps down instead of the copy wrapping into three or four lines. Below the
+   smallest step the nowrap is dropped, because a 24px sentence forced onto one
+   line at 320px would run off the edge. */
+.hero__title {
+  font-size: clamp(20px, 3.5vw, 43px);
+}
+
+.hero__title-1 {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero__title-2 {
+  display: block;
+  white-space: nowrap;
+  color: var(--ink-soft);
+  margin-top: 0.06em;
+}
+
+.hero__lede {
+  margin: 18px 0 0;
+  max-width: 58ch;
+  font-size: clamp(13px, 0.86vw, 13px);
+  color: var(--ink-soft);
+}
+
+.hero__acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0 0;
+}
+
+.hero__acts .btn {
+  font-size: 13px;
+  padding: 9px 16px;
+}
+
+.acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn--solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn--solid:hover {
+  background: var(--ink-soft);
+}
+
+.more {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 15px;
+  text-underline-offset: 4px;
+}
+
+/* -------------------------------------------------------------- ladder ----- */
+
+.ladder {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+  counter-reset: rung;
+}
+
+.ladder__rung {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 0 22px;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.ladder__rung:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.ladder__at {
+  margin: 2px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ladder__what {
+  margin: 0;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.ladder__detail {
+  margin: 4px 0 0;
+  max-width: 62ch;
+  color: var(--ink-soft);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px 40px;
+  margin-top: 20px;
+  max-width: 900px;
+}
+
+.split p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.split strong {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------- seals ----- */
+
+.seals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.seal {
+  padding: 22px 22px 24px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.seal__title {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.seal__body {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.promise {
+  max-width: 74ch;
+  padding-left: 22px;
+  margin: 26px 0 0;
+}
+
+.promise li {
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+}
+
+.promise strong {
+  color: var(--ink);
+}
+
+.plain {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  max-width: 74ch;
+}
+
+.plain li {
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.plain li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.plain strong {
+  color: var(--ink);
+}
+
+code {
+  font-size: 0.92em;
+  background: var(--deep);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* --------------------------------------------------------------- cards ----- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 22px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+.card__title {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.card__body {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.kinds {
+  margin: 26px 0 0;
+  max-width: 800px;
+}
+
+.kinds__row {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 2px 24px;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.kinds__row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.kinds dt {
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36;
+  font-weight: 600;
+}
+
+.kinds dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------- price ------ */
+
+.price {
+  width: 100%;
+  max-width: 820px;
+  margin: 26px 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Five columns of money do not fit a phone, so the table gets its own
+   horizontal scroll rather than pushing the page sideways. */
+.price-scroll {
+  max-width: 820px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.price-scroll .price {
+  margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  .price {
+    min-width: 460px;
+  }
+
+  .price th,
+  .price td {
+    padding: 12px 10px;
+  }
+}
+
+.price caption {
+  caption-side: bottom;
+  padding-top: 16px;
+  color: var(--muted);
+  font-size: 13.5px;
+  text-align: left;
+  max-width: 76ch;
+}
+
+.price th,
+.price td {
+  padding: 14px 12px;
+  text-align: left;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.price thead th {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--ink);
+}
+
+.price tbody th {
+  font-weight: 600;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36;
+  font-size: 17px;
+}
+
+.price__note {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.price tbody tr:last-child th,
+.price tbody tr:last-child td {
+  border-bottom: 1px solid var(--rule);
+}
+
+.qa {
+  max-width: 78ch;
+  margin: 26px 0 0;
+}
+
+.qa dt {
+  margin: 26px 0 6px;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 48;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.qa dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------- prose ----- */
+
+.prose h2 {
+  font-size: clamp(21px, 2.2vw, 26px);
+  max-width: none;
+  margin: 44px 0 0;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  max-width: 72ch;
+  color: var(--ink-soft);
+  margin: 14px 0 0;
+}
+
+.prose ul,
+.prose ol {
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------- footer ----- */
+/* Unchanged from the spec except the name: sage, one viewport, the coach
+   crossing below the copyright line. */
+
+.footer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--paper);
+  isolation: isolate;
+}
+
+.footer__video {
+  order: 2;
+  flex: 1 1 0;
+  min-height: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: -12vh;
+  margin-top: -12svh;
+  object-fit: cover;
+  object-position: 50% 35%;
+  mix-blend-mode: multiply;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.footer__content {
+  order: 1;
+  flex: none;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(28px, 2.8vw, 36px) 16px 0;
+}
+
+.footer__mark {
+  width: clamp(44px, 4.1vw, 54px);
+  height: auto;
+  color: var(--ink);
+  display: block;
+}
+
+.footer__brand {
+  margin: clamp(6px, 0.9vw, 12px) 0 0;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 72;
+  font-weight: 600;
+  font-size: clamp(40px, 3.6vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.footer__brand a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer__tagline {
+  margin: clamp(14px, 1.4vw, 18px) 0 0;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 44em;
+}
+
+.footer__nav {
+  margin-top: clamp(28px, 3.2vw, 40px);
+}
+
+.footer__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.footer__nav li {
+  display: flex;
+  align-items: center;
+}
+
+.footer__nav li + li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink);
+  margin: 0 clamp(16px, 1.8vw, 24px);
+  flex: none;
+}
+
+.footer__nav a {
+  position: relative;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: clamp(14px, 1.1vw, 15px);
+  font-weight: 400;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.footer__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.footer__nav a:hover::after,
+.footer__nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.footer__nav a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.footer__copy {
+  margin: clamp(22px, 2.4vw, 30px) 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+/* ------------------------------------------------------------ responsive --- */
+
+@media (max-width: 900px) {
+  .footer__nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 4px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .footer__nav li {
+    justify-content: center;
+  }
+
+  .footer__nav li + li::before {
+    display: none;
+  }
+
+  .footer__nav a {
+    padding: 8px 4px;
+    font-size: 15px;
+  }
+
+  .kinds__row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Narrow screens: there is no room for a 16:9 frame edge to edge without it
+   becoming a stamp in the middle of a lot of paper, so it fills instead and the
+   sides of the viaduct run off — the coach and the bridge get bigger, which is
+   the better trade on a phone. */
+  .hero {
+    height: 100svh;
+  }
+
+  .hero__video {
+    object-fit: cover;
+    object-position: 50% 74%;
+  }
+
+  .hero::before {
+    background: linear-gradient(
+      180deg,
+      var(--paper) 0%,
+      var(--paper) 58%,
+      rgba(235, 238, 231, 0.5) 74%,
+      rgba(235, 238, 231, 0) 94%
+    );
+  }
+
+  .hero__in {
+    padding-bottom: 22px;
+  }
+
+  /* Too narrow to hold a whole sentence on one line: let it wrap rather than
+     overflow, and size it so a wrapped headline still reads as two lines. */
+  /* Below 700px the two lines are pinned to one row each, so the size is set from
+     the viewport width in the one unit that guarantees it: 440px of line two at
+     21px, which means 21px * (100vw / 440) fits at any width in this range.
+     `100vw` includes the scrollbar gutter on desktop, which is why this only
+     applies under 700px where that gutter is gone on the platforms that show
+     one; the min() floors stop it collapsing on a 320px phone. */
+  .hero__title {
+    font-size: clamp(15px, 4.75vw, 21px);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__content {
+    padding: 36px 16px 0;
+  }
+
+  .footer__nav ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 320px;
+  }
+
+  .ladder__rung {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .masthead__in {
+    padding: 14px 20px;
+  }
+
+  .masthead__nav {
+    gap: 4px 14px;
+    font-size: 13.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .masthead__nav a::after,
+  .footer__nav a::after {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
