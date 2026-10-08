@@ -1,4 +1,45 @@
 User-agent: *
 Allow: /
 
+# AI engines that cite rather than train. These read the site to answer
+# questions about it, which is the traffic we want.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Training crawlers. Refused deliberately: the writing here is ours, and a
+# marketing page being scraped into a training set is not a trade we were
+# offered a say in.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot- training
+Disallow: /
+
 Sitemap: https://www.coffinmail.com/sitemap.xml

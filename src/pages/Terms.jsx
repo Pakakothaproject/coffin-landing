@@ -1,10 +1,12 @@
-import { useMeta } from '../Layout.jsx'
+import { useSeo } from '../Seo.jsx'
 
 export default function Terms() {
-  useMeta(
-    'Terms — CoffinMail',
-    'The terms of the CoffinMail service — including the part that matters most: this service never determines whether you have died, and nothing is ever sent on silence alone.',
-  )
+  useSeo({
+    title: 'Terms — CoffinMail, Mails After Death',
+    description:
+      'The terms of CoffinMail, including the part that matters most: this service never determines whether you have died, and no letter is ever sent on silence alone.',
+    path: '/terms',
+  })
 
   return (
     <>

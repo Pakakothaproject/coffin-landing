@@ -28,7 +28,7 @@ import {
   termLabel,
 } from './vendor/engine.js'
 
-// As written in src/pages/Pricing.jsx
+// As written in www/src/pages/Pricing.jsx
 const sitePrice = (messages, years) =>
   Math.min(2000 + 500 * (messages - 1) + 500 * (years - 1) * messages, 50000)
 

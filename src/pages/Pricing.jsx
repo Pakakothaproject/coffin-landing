@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useMeta } from '../Layout.jsx'
+import { useSeo } from '../Seo.jsx'
 
 const APP_URL = 'https://app.coffinmail.com'
 
@@ -27,10 +27,12 @@ const TERMS = [
 const MESSAGES = [1, 2, 3, 5]
 
 export default function Pricing() {
-  useMeta(
-    'Pricing — CoffinMail',
-    'Three months free to try, with no card. After that $20 covers one message for a year, every further message is $5, and nothing ever costs more than $500.',
-  )
+  useSeo({
+    title: 'Pricing — CoffinMail, from $20, never more than $500',
+    description:
+      'Three months free, no credit card. Then $20 covers one message for a year, each further message is $5, and nothing costs over $500. One payment, nothing renews.',
+    path: '/pricing',
+  })
 
   return (
     <>
@@ -48,7 +50,7 @@ export default function Pricing() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">What a message costs to keep</h2>
+          <h2 className="h2">How much does it cost?</h2>
           <div className="price-scroll" tabIndex={0} role="region" aria-label="Price schedule, scrollable">
             <table className="price">
               <caption>
@@ -92,7 +94,7 @@ export default function Pricing() {
 
       <section className="band band--deep">
         <div className="wrap">
-          <h2 className="h2">The free trial, in plain terms</h2>
+          <h2 className="h2">Is the free trial really free, and is a card needed?</h2>
           <dl className="kinds">
             <div className="kinds__row">
               <dt>Three months, no card</dt>
@@ -136,7 +138,7 @@ export default function Pricing() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">The two fair questions</h2>
+          <h2 className="h2">Why does a longer term cost more?</h2>
           <dl className="qa">
             <div>
               <dt>Why does a longer term cost more?</dt>
@@ -170,7 +172,7 @@ export default function Pricing() {
 
       <section className="band band--tight">
         <div className="wrap">
-          <h2 className="h2">The uncomfortable part</h2>
+          <h2 className="h2">Will this company still exist?</h2>
           <p className="lede">
             We are a small company, and small companies fail. This one may not exist in twenty years. It is the biggest
             risk in the whole idea, so it is written down rather than implied: ninety days’ notice, everything exported

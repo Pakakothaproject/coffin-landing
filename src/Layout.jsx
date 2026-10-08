@@ -11,26 +11,6 @@ const NAV = [
   { label: 'Pricing', to: '/pricing' },
 ]
 
-/** Title, description and the two tags a link preview actually reads. */
-export function useMeta(title, description) {
-  useEffect(() => {
-    document.title = title
-    const set = (name, content, attr = 'name') => {
-      let el = document.head.querySelector(`meta[${attr}="${name}"]`)
-      if (!el) {
-        el = document.createElement('meta')
-        el.setAttribute(attr, name)
-        document.head.appendChild(el)
-      }
-      el.setAttribute('content', content)
-    }
-    set('description', description)
-    set('og:title', title, 'property')
-    set('og:description', description, 'property')
-    set('og:type', 'website', 'property')
-  }, [title, description])
-}
-
 export default function Layout({ children }) {
   const { pathname } = useLocation()
 

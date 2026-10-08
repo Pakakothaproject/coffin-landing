@@ -11,8 +11,16 @@ npm install
 npm run dev        # http://localhost:5174
 npm run build      # -> dist
 npm run preview    # serve the build on 4174
-node check-price.mjs
+
+node check-price.mjs   # the printed price table matches the product's formula
+node check-seo.mjs     # titles, descriptions, canonical, OG, sitemap, llms.txt
+node check-schema.mjs  # the JSON-LD parses, and the FAQ is really on the page
 ```
+
+The three checks run against the preview server, so `npm run preview` in another
+terminal first. They exist because every problem they catch is invisible in a
+browser: a title that Google truncates at 60 characters still looks perfect on
+screen, and a sitemap served as HTML is a `200` that says nothing.
 
 ## What is here
 
@@ -42,6 +50,11 @@ engine across and rerun it:
 cp ../coffin-mail/supabase/functions/_shared/engine.js vendor/engine.js
 node check-price.mjs
 ```
+
+**The FAQ and the schema.** `HOME_FAQ` in `src/Seo.jsx` is the single source for
+both the visible questions and the `FAQPage` markup. Do not write a second copy
+of the questions: Google penalises FAQ schema whose questions are not on the
+page, and `check-schema.mjs` fails if that happens.
 
 ## Deploying
 

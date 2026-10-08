@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
-import { useMeta } from '../Layout.jsx'
+import { useSeo } from '../Seo.jsx'
 
 export default function Privacy() {
-  useMeta(
-    'Privacy — CoffinMail',
-    'Who can read your words, what we keep, where it is kept, how to get it back, and how to make it disappear.',
-  )
+  useSeo({
+    title: 'Privacy — CoffinMail, who can read your letters',
+    description:
+      'Nobody reads your letters: not us, not staff, not support. What CoffinMail holds, who can see it, where it is kept, and how to export or delete all of it.',
+    path: '/privacy',
+  })
 
   return (
     <>

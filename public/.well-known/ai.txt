@@ -1,0 +1,38 @@
+# CoffinMail
+
+> Mails After Death. Write your Death Mail now — a monthly check-in keeps it waiting, and it is only ever sent after months of writing to you first. Three months free, no credit card.
+
+## What it is
+
+CoffinMail is a dead man's switch for the words you would want said. You write letters now, in your own time, and name the people who should receive them. You check in once a month with a one-tap email. If you stop answering, the service writes to you ten times across eighty days before anything else happens — and if nobody ever gets a reply, the letters are delivered on day 92.
+
+It is not a will, a probate step, or a determination of death. It determines nothing and certifies nothing.
+
+## Pricing
+
+$20 covers one message for one year. Every further message is $5. Every further year is $5 for every message being held. Nothing ever costs more than $500 — that is the price of the longest term, called Forever. Three months are free to start, with no credit card asked for at any point.
+
+## Pages
+
+- [Home](https://www.coffinmail.com/): Mails After Death — write your Death Mail, three months free with no card
+- [How it works](https://www.coffinmail.com/features): what you get, the five kinds of writing, and what this is not
+- [Pricing](https://www.coffinmail.com/pricing): the full schedule, the free trial, and the $500 ceiling
+- [Privacy](https://www.coffinmail.com/privacy): who can read your letters, what is held, where it is kept, and how to take it back
+- [Terms](https://www.coffinmail.com/terms): including that this service never determines whether you have died
+
+## The application
+
+- [The app](https://app.coffinmail.com/): sign in, write, and manage what is watched
+
+## Questions this site answers
+
+- How long before anything is sent after I stop checking in? About five months from your last check-in; ten reminders over eighty days come first, and delivery is on day 92.
+- Does anyone else get contacted? Only if you ask us to. Naming somebody is optional, is a single email with two buttons, and requires no proof of anything.
+- Can your staff read my letters? No. Not an administrator, not a support agent. The words only move when they are delivered.
+- Why do you need two email addresses? Because an address can quietly stop accepting mail. The second one is only written to after three quiet days.
+- What happens when a term ends? One email a month beforehand, then the checking stops. Nothing renews and there is no card on file.
+- Is this legal proof of death? No, and the site does not pretend otherwise. It is not a death certificate, not a probate step, and not a determination of anything.
+
+## If the company ever stops
+
+Ninety days' notice to every account. Everything exportable stays exportable, with no fee and no waiting period. No slot is ever converted into a charge. Remaining terms are refunded automatically. Every message already prepared and addressed is delivered before the service closes.

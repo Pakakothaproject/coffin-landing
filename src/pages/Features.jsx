@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useMeta } from '../Layout.jsx'
+import { useSeo } from '../Seo.jsx'
 
 const APP_URL = 'https://app.coffinmail.com'
 
@@ -70,10 +70,12 @@ const NOT = [
 ]
 
 export default function Features() {
-  useMeta(
-    'What you get — CoffinMail',
-    'Three months free with no card. Then unlimited drafts, attachments, sealed lists, two addresses so a dead inbox cannot hide, and the full sequence you can read before you start.',
-  )
+  useSeo({
+    title: 'What you get — CoffinMail, Mails After Death',
+    description:
+      'Unlimited free drafts, photographs and sealed lists, a monthly check-in at two addresses, and an optional second pair of eyes. What is included, what is not.',
+    path: '/features',
+  })
 
   return (
     <>
@@ -90,7 +92,7 @@ export default function Features() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">The service</h2>
+          <h2 className="h2">What exactly do I get?</h2>
           <div className="cards">
             {INCLUDED.map((f) => (
               <article className="card" key={f.title}>
@@ -104,7 +106,7 @@ export default function Features() {
 
       <section className="band band--deep">
         <div className="wrap">
-          <h2 className="h2">What this is not</h2>
+          <h2 className="h2">What is this not?</h2>
           <p className="lede">
             Said plainly, because the gaps are where people get misled by services like this one.
           </p>
@@ -129,7 +131,7 @@ export default function Features() {
 
       <section className="band band--tight">
         <div className="wrap">
-          <h2 className="h2">About your words</h2>
+          <h2 className="h2">Who can read what I write?</h2>
           <p className="lede">
             Sealed on your own device, kept where only the right person can reach them, and handed over once — through a
             link that cannot be reused or guessed. The long version, in plain terms, is on the{' '}

@@ -6,11 +6,21 @@
     <link rel="icon" type="image/png" sizes="256x256" href="/icon-256.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CoffinMail — Mails After Death</title>
+    <!--
+      Title, description, canonical, OG, Twitter and JSON-LD are all written by
+      src/Seo.jsx at runtime, per route. The ones here are the pre-render /
+      no-JS fallback: a crawler that does not run JavaScript, and anything that
+      reads the file rather than the DOM. They must not drift from the component,
+      so `node check-seo.mjs` compares the served head against the expectations.
+    -->
+    <title>CoffinMail — Mails After Death, written before you are</title>
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="CoffinMail in plain text for AI answer engines" />
     <meta
       name="description"
-      content="Mails After Death. Write your Death Mail now — a monthly check-in keeps it waiting, and it is only ever sent after months of writing to you first. Three months free, no card."
+      content="Write your Death Mail now. Check in once a month; if you stop, we write to you ten times over eighty days before anything is sent. Three months free, no card."
     />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.coffinmail.com/" />
     <meta name="theme-color" content="#ebeee7" />
     <meta property="og:site_name" content="CoffinMail" />
     <meta property="og:image" content="https://www.coffinmail.com/logo-wide.png" />

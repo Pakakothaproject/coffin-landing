@@ -1,6 +1,10 @@
 ﻿import { Link } from 'react-router-dom'
 import VideoScene from '../VideoScene.jsx'
-import { useMeta } from '../Layout.jsx'
+import { useSeo, HOME_FAQ, LADDER_STEPS } from '../Seo.jsx'
+
+// The FAQ renders from the same array the FAQPage schema is built from, so the
+// markup can never describe questions the page does not show.
+const FAQ = HOME_FAQ
 
 const APP_URL = 'https://app.coffinmail.com'
 
@@ -78,42 +82,22 @@ const PROMISES = [
   },
 ]
 
-const FAQ = [
-  {
-    q: 'What does it cost to try?',
-    a: 'Nothing, for three months, and we never ask for a card â€” not to begin and not when the trial ends. Everything runs exactly as it would afterwards: the same letters, the same checking. We email you once before it runs out, and if you do nothing the checking stops and your letters go quiet. Nothing is deleted and nothing is ever sent because a trial lapsed.',
-  },
-  {
-    q: 'How long before anything could be sent?',
-    a: 'About five months from your last check-in. Roughly eleven weeks of that is spent writing to you, at two addresses, before anything else happens. If you would rather it moved sooner, there is a shorter version: the same sequence in the same order, about a month and a half from your last check-in.',
-  },
-  {
-    q: 'What if I just forget, and it goes out while I am sitting here?',
-    a: 'One missed check-in does nothing at all. Ten reminders over eighty days come first, and from day three they go to a second address as well. And a single tap, from a link we email you twice in that final stretch, stops all of it â€” right up to the moment it goes.',
-  },
-  {
-    q: 'Does anyone else get contacted?',
-    a: 'Only if you ask us to. Naming somebody is optional, it is one tap to add, and it is a single email with two buttons â€” not a question, not a document, and no proof of anything. They are told that doing nothing costs them nothing, and one reply per silence is enough - we start again from zero, with a longer window next time.',
-  },
-  {
-    q: 'Why do you need two email addresses?',
-    a: 'Because an address can quietly stop accepting mail without anybody noticing, and that is the quietest way this could go wrong. We ask the first one on its own, and only bring the second in once you have missed three days â€” so the people who happen to know your address never get surprise mail.',
-  },
-  {
-    q: 'Can anyone at your end read my letters?',
-    a: 'No. Not an administrator, not a support agent. The people running the service see names, dates and states â€” the way a clerk sees an envelope. The words themselves only move when they are delivered.',
-  },
-  {
-    q: 'Is this legal proof of anything?',
-    a: 'No, and we are careful never to pretend it is. It is not a death certificate, not a probate step, and not a determination of anything. It is a message you set in advance, kept by us, and delivered when you can no longer tell us to stop.',
-  },
-]
 
 export default function Home() {
-  useMeta(
-    'CoffinMail â€” write your Death Mail',
-    'Write your Death Mail now. A monthly check-in keeps it waiting; it only goes out after eighty days of writing to you, and never on silence alone.',
-  )
+  useSeo({
+    title: 'CoffinMail — Mails After Death, written before you are',
+    description:
+      'Write your Death Mail now. Check in once a month; if you stop, we write to you ten times over eighty days before anything is sent. Three months free, no card.',
+    path: '/',
+    faq: HOME_FAQ,
+    howTo: {
+      name: 'How CoffinMail delivers a letter after death',
+      description:
+        'The full sequence, from the first monthly check-in to delivery on day 92. Ten reminders come first; a person is only asked if you nominated one.',
+      totalTime: 'P92D',
+      steps: LADDER_STEPS,
+    },
+  })
 
   return (
     <>
@@ -142,7 +126,16 @@ export default function Home() {
 
       <section className="band band--tight">
         <div className="wrap">
-          <h2 className="h2">What you get</h2>
+          {/* Answer-first, and invisible as a device: the paragraph a search
+              engine or an answer engine lifts out for "what is a dead man's
+              switch" is the same one a person reads. */}
+          <p className="lede lede--answer">
+            CoffinMail keeps letters you write now and delivers them to the people you name if you stop being
+            able to tell us to stop. You check in once a month with a one-tap email. If you go quiet, we write to
+            you ten times across eighty days, and a person you nominated is asked before anything is sent. If nobody
+            ever replies, the letters go out on day 92.
+          </p>
+          <h2 className="h2 h2--after">What you get</h2>
           <div className="seals">
             {WHAT.map((w) => (
               <article className="seal" key={w.title}>
@@ -156,7 +149,7 @@ export default function Home() {
 
       <section className="band band--deep">
         <div className="wrap">
-          <h2 className="h2">What happens if you stop answering</h2>
+          <h2 className="h2">What happens if I stop checking in?</h2>
           <p className="lede">
             This is the whole sequence. There is no hidden stage, no shortened version, and nothing here happens on a
             single missed check-in.
@@ -182,7 +175,7 @@ export default function Home() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">What we promise</h2>
+          <h2 className="h2">What do you promise me?</h2>
           <div className="cards">
             {PROMISES.map((p) => (
               <article className="card" key={p.title}>
@@ -196,7 +189,7 @@ export default function Home() {
 
       <section className="band band--tight band--deep">
         <div className="wrap">
-          <h2 className="h2">Two ways to do it</h2>
+          <h2 className="h2">How long does it take before anything is sent?</h2>
           <p className="lede">
             If you are arranging for later, take the time the sequence needs. If you already know you are ill, the
             shorter version exists for exactly that reason â€” same order, same stops, much less waiting. You choose, and
@@ -223,7 +216,7 @@ export default function Home() {
 
       <section className="band band--deep">
         <div className="wrap">
-          <h2 className="h2">Three months, on us, with no card</h2>
+          <h2 className="h2">Is there a free trial?</h2>
           <div className="split">
             <p>
               Not a demo and not a countdown to a payment screen. For three months you get the whole thing â€” your letters,
@@ -247,7 +240,7 @@ export default function Home() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">Three months free. Then twenty dollars.</h2>
+          <h2 className="h2">What does it cost after the trial?</h2>
           <div className="split">
             <p>
               Start with everything running for three months, on the house, and <strong>no card asked for</strong> â€” not
@@ -271,7 +264,7 @@ export default function Home() {
 
       <section className="band band--tight band--deep">
         <div className="wrap">
-          <h2 className="h2">If we ever stop</h2>
+          <h2 className="h2">What happens if CoffinMail ever stops?</h2>
           <p className="lede">
             You would be asking a small company to hold the last words of your life, so the failure case is written down
             now rather than argued about later.
@@ -301,12 +294,12 @@ export default function Home() {
 
       <section className="band">
         <div className="wrap">
-          <h2 className="h2">The questions everybody asks</h2>
+          <h2 className="h2">Questions people actually ask</h2>
           <dl className="qa">
-            {FAQ.map((f) => (
-              <div key={f.q}>
-                <dt>{f.q}</dt>
-                <dd>{f.a}</dd>
+            {FAQ.map(({ question: q, answer: a }) => (
+              <div key={q}>
+                <dt>{q}</dt>
+                <dd>{a}</dd>
               </div>
             ))}
           </dl>
