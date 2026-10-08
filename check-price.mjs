@@ -1,20 +1,31 @@
 /**
  * The price schedule on /pricing is a copy, so pin it.
  *
- * The schedule printed on the pricing page is written out twice — once as the
- * table and once in `sitePrice` below — and both must agree with the product's
- * own formula. That formula lives in the app repository at
- * `supabase/functions/_shared/engine.js`, mirrored here as `vendor/engine.js`
- * so this check can run on its own. Refresh the mirror when the product's price
- * changes:
- *
- *   cp ../coffin-mail/supabase/functions/_shared/engine.js vendor/engine.js
- *
- * A marketing site quoting a stale price is worse than one with no price on it.
+ * `public.price_cents` in the database is what anybody is actually charged, and
+ * `supabase/functions/_shared/engine.js` is the browser's mirror of it. This
+ * fails if the table printed on the pricing page ever disagrees with either —
+ * a marketing site quoting a stale price is worse than one with no price on it.
  *
  *   node check-price.mjs
+ *
+ * This file lives in two repositories, and the engine sits at a different
+ * relative path in each: beside the product in coffin-mail, and vendored so the
+ * check can run standalone in coffin-landing. Looking for both means copying the
+ * file between the two can never break it.
  */
-import {
+import { existsSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+
+const ENGINE = ['./vendor/engine.js', '../supabase/functions/_shared/engine.js'].find((p) =>
+  existsSync(fileURLToPath(new URL(p, import.meta.url))),
+)
+
+if (!ENGINE) {
+  console.error('cannot find the price engine: expected vendor/engine.js or ../supabase/functions/_shared/engine.js')
+  process.exit(1)
+}
+
+const {
   BASE_CENTS,
   SLOT_STEP_CENTS,
   YEAR_STEP_CENTS,
@@ -26,7 +37,7 @@ import {
   isTrial,
   isCapped,
   termLabel,
-} from './vendor/engine.js'
+} = await import(ENGINE)
 
 // As written in www/src/pages/Pricing.jsx
 const sitePrice = (messages, years) =>

@@ -9,7 +9,8 @@
  */
 import puppeteer from 'puppeteer-core'
 
-const BASE = process.argv[2] || 'http://localhost:4174'
+// vite preview binds the IPv6 loopback only — see check-seo.mjs.
+const BASE = (process.argv[2] || 'http://localhost:4174').replace('//localhost', '//[::1]')
 const ROUTES = ['/', '/features', '/pricing', '/privacy', '/terms']
 
 let problems = 0

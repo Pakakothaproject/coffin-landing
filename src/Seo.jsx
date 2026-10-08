@@ -17,7 +17,11 @@ import { useEffect } from 'react'
  */
 
 export const SITE = 'https://www.coffinmail.com'
-const IMAGE = `${SITE}/logo-wide.png`
+// The card make-og.mjs renders, not the logo: a link preview wants 1200x630 of
+// something readable, and a bare mark on transparency is a small grey smudge.
+const IMAGE = `${SITE}/og.png`
+const IMAGE_W = 1200
+const IMAGE_H = 630
 const NAME = 'CoffinMail'
 
 /** The org, once, everywhere. This is the entity an answer engine resolves. */
@@ -25,7 +29,6 @@ const ORGANIZATION = {
   '@type': 'Organization',
   '@id': `${SITE}/#organization`,
   name: NAME,
-  alternateName: 'Coffin Mail',
   url: SITE,
   logo: {
     '@type': 'ImageObject',
@@ -37,7 +40,9 @@ const ORGANIZATION = {
   slogan: 'Mails After Death',
   description:
     'A dead man’s switch for the words you would want said. Write now, check in monthly, and the letters are only ever delivered after months of writing to you first.',
-  email: 'hello@coffinmail.com',
+  // No email: nothing here has been confirmed as a monitored address, and an
+  // Organization.contactPoint pointing at a dead inbox is worse than no contact
+  // at all. Add it when there is a real one, and give it contactType too.
   knowsAbout: [
     'Digital legacy',
     'Last letters',
@@ -126,8 +131,8 @@ export function useSeo({ title, description, path, ogTitle, noindex, faq, howTo,
     meta('property', 'og:description', description)
     meta('property', 'og:url', url)
     meta('property', 'og:image', IMAGE)
-    meta('property', 'og:image:width', '1024')
-    meta('property', 'og:image:height', '487')
+    meta('property', 'og:image:width', String(IMAGE_W))
+    meta('property', 'og:image:height', String(IMAGE_H))
     meta('property', 'og:image:alt', `${NAME} — Mails After Death`)
     meta('property', 'og:locale', 'en_GB')
 
@@ -158,8 +163,8 @@ export function useSeo({ title, description, path, ogTitle, noindex, faq, howTo,
         '@id': `${SITE}/#primaryimage`,
         url: IMAGE,
         contentUrl: IMAGE,
-        width: 1024,
-        height: 487,
+        width: IMAGE_W,
+        height: IMAGE_H,
         caption: `${NAME} — Mails After Death`,
       },
       {

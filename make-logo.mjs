@@ -18,7 +18,6 @@ import puppeteer from 'puppeteer-core'
 // on the site ever loads it, so shipping it would just make the deploy bigger.
 const SRC = 'assets-src/logo-source.png'
 const OUT_SQUARE = 'public/logo.png'
-const OUT_WIDE = 'public/logo-wide.png'
 
 const browser = await puppeteer.launch({
   executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -109,11 +108,10 @@ await browser.close()
 const write = (path, dataUrl) => writeFileSync(path, Buffer.from(dataUrl.split(',')[1], 'base64'))
 
 write(OUT_SQUARE, result.square512)
-write(OUT_WIDE, result.wide)
 write('public/icon-256.png', result.square256)
 write('public/icon-64.png', result.icon64)
 write('public/apple-touch-icon.png', result.icon180)
 
 const kb = (p) => Math.round(readFileSync(p).length / 1024)
 console.log(`source ${result.source.width}x${result.source.height}, ink box ${result.box.cw}x${result.box.ch} at ${result.box.minX},${result.box.minY}`)
-console.log(`logo.png ${kb(OUT_SQUARE)}KB · icon-256 ${kb('public/icon-256.png')}KB · icon-64 ${kb('public/icon-64.png')}KB · apple-touch-icon ${kb('public/apple-touch-icon.png')}KB · logo-wide ${kb(OUT_WIDE)}KB`)
+console.log(`logo.png ${kb(OUT_SQUARE)}KB · icon-256 ${kb('public/icon-256.png')}KB · icon-64 ${kb('public/icon-64.png')}KB · apple-touch-icon ${kb('public/apple-touch-icon.png')}KB`)

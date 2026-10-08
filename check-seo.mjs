@@ -8,8 +8,13 @@
  *   node check-seo.mjs [baseUrl]
  */
 import puppeteer from 'puppeteer-core'
+import { readFileSync } from 'node:fs'
 
-const BASE = process.argv[2] || 'http://localhost:4174'
+// vite preview binds the IPv6 loopback only, and Node's fetch and Chrome both
+// disagree about which of localhost's two addresses to use — so a check pointed
+// at "localhost" reports four missing files while the page plainly loaded. Ask
+// for the address the server is actually on.
+const BASE = (process.argv[2] || 'http://localhost:4174').replace('//localhost', '//[::1]')
 const ROUTES = ['/', '/features', '/pricing', '/privacy', '/terms']
 
 // Google's own guidance: title ~50-60 chars, description ~150-160.
@@ -19,6 +24,8 @@ const DESC_MIN = 70
 const DESC_MAX = 160
 
 let problems = 0
+// Kept so the share-image check below can read what the pages actually declared.
+let pageState = null
 const note = (m) => {
   console.log(`  ! ${m}`)
   problems++
@@ -56,6 +63,8 @@ for (const route of ROUTES) {
       ogDesc: meta('og:description', 'property'),
       ogUrl: meta('og:url', 'property'),
       ogImage: meta('og:image', 'property'),
+      ogImageW: meta('og:image:width', 'property'),
+      ogImageH: meta('og:image:height', 'property'),
       ogType: meta('og:type', 'property'),
       twitter: meta('twitter:card'),
       twTitle: meta('twitter:title'),
@@ -102,6 +111,7 @@ for (const route of ROUTES) {
   console.log(`  h1          ${s.h1.map((h) => `"${h.text}"`).join(' | ')}`)
   console.log(`  h2 (${s.h2.length})    ${s.h2.map((h) => h.text.slice(0, 44)).join(' · ')}`)
   console.log(`  words ${s.words} · jsonld ${s.jsonLd.length} · imgs-no-alt ${s.imagesNoAlt} · hash-links ${s.hashLinks}`)
+  pageState = s
 }
 
 // The things that are files rather than pages.
@@ -130,6 +140,34 @@ for (const [f, want] of STATIC) {
   } catch (e) {
     console.log(`  ERR ${f}  ${e.message}`)
     note(`${f} is missing`)
+  }
+}
+
+// The declared size of the share image must be the size it actually is. These
+// numbers get typed into Seo.jsx *and* index.html, and they were wrong once
+// already — a 1024x487 card declared for a 266x256 file, which fails rich-result
+// validation. A check that reads the PNG header is the only thing that stops
+// the same numbers drifting apart a second time.
+{
+  console.log('\nshare image')
+  const url = pageState?.ogImage || ''
+  const path = url.replace(/^https?:\/\/[^/]+/, '')
+  const file = 'public' + path
+  let buf = null
+  try {
+    buf = readFileSync(file)
+  } catch {
+    note(`${url} points at ${file}, which does not exist`)
+  }
+  if (buf) {
+    // PNG: the width and height are big-endian uint32s at offset 16.
+    const w = buf.readUInt32BE(16)
+    const h = buf.readUInt32BE(20)
+    console.log(`  ${path}  ${w}x${h}  ${Math.round(buf.length / 1024)}KB  (declared ${pageState.ogImageW}x${pageState.ogImageH})`)
+    if (pageState.ogImageW !== String(w) || pageState.ogImageH !== String(h))
+      note(`og:image declares ${pageState.ogImageW}x${pageState.ogImageH} but ${file} is ${w}x${h}`)
+    // Below this and platforms letterbox it or drop it.
+    if (w < 1200 || h < 630) note(`${path} is ${w}x${h}; a share card wants at least 1200x630`)
   }
 }
 
